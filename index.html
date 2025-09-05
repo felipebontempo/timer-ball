@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Timer Ball</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <header class="top-bar">
+      <div class="info-card" aria-live="polite">
+        <span class="label">Hora atual</span>
+        <span id="currentTime" class="value">--:--:--</span>
+      </div>
+      <div class="info-card" aria-live="polite">
+        <span class="label">Tempo restante</span>
+        <span id="timeLeft" class="value">00:00</span>
+      </div>
+    </header>
+
+    <main class="app-grid">
+      <section class="board" aria-label="Painel de progresso do tempo">
+        <div id="dotsGrid" class="dots-grid" role="list" aria-describedby="gridSummary"></div>
+      </section>
+
+      <aside class="controls">
+        <fieldset>
+          <legend>Tempo do timer</legend>
+          <label for="totalPreset" class="sr-only">Escolher tempo total</label>
+          <select id="totalPreset">
+            <option value="300">5 minutos</option>
+            <option value="600">10 minutos</option>
+            <option value="900">15 minutos</option>
+            <option value="1800">30 minutos</option>
+            <option value="2700">45 minutos</option>
+            <option value="3600">1 hora</option>
+            <option value="7200">2 horas</option>
+            <option value="custom">Personalizado…</option>
+          </select>
+
+          <div id="customTotalGroup" class="row hidden" aria-hidden="true">
+            <input id="customTotalValue" type="number" min="1" step="1" value="25" />
+            <select id="customTotalUnit">
+              <option value="minutes">minutos</option>
+              <option value="hours">horas</option>
+            </select>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Intervalo (tamanho de cada bolinha)</legend>
+          <div class="row">
+            <input id="intervalValue" type="number" min="5" step="5" value="60" />
+            <select id="intervalUnit">
+              <option value="seconds">segundos</option>
+              <option value="minutes">minutos</option>
+            </select>
+          </div>
+        </fieldset>
+
+        <p id="gridSummary" class="muted">—</p>
+
+        <div class="actions">
+          <button id="startBtn" class="btn btn-primary">Start</button>
+          <button id="pauseBtn" class="btn" disabled>Pausar</button>
+          <button id="resetBtn" class="btn" disabled>Reset</button>
+        </div>
+
+        <p id="message" class="message" role="status" aria-live="polite"></p>
+      </aside>
+    </main>
+
+    <noscript>Ative o JavaScript para usar o Timer.</noscript>
+    <script src="./script.js"></script>
+  </body>
+</html>
+
+
