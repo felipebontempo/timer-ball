@@ -236,13 +236,13 @@ function markActiveDot(activeIndex) {
 }
 
 function togglePause() {
-  if (!state.isRunning) return;
+  // Permite tanto pausar quanto retomar (sem sair cedo quando pausado)
   if (state.tickIntervalId) {
     clearInterval(state.tickIntervalId);
     state.tickIntervalId = null;
   }
 
-  // Se estava rodando, pausa. Se estava pausado, volta.
+  // Se estava rodando, pausa. Se estava pausado, continua.
   const elapsedNow = Math.max(0, nowSeconds() - state.startedAtEpoch);
   const isPausing = pauseBtn.textContent === "Pausar";
   if (isPausing) {
@@ -250,6 +250,8 @@ function togglePause() {
     state.isRunning = false;
     pauseBtn.textContent = "Continuar";
   } else {
+    // Só continua se já foi iniciado ao menos uma vez
+    if (state.startedAtEpoch == null) return;
     state.isRunning = true;
     state.startedAtEpoch = nowSeconds() - state.pausedElapsedSeconds;
     state.tickIntervalId = setInterval(updateTick, 250);
